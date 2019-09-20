@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import DragRange from "react-drag-range";
 
 import './styles.css';
 
@@ -23,10 +24,24 @@ const ZoomInButton = ({ disabled, onClick }) => (
     </button>
 );
 
-const ZoomButtons = ({scale, minScale, maxScale, onZoomInClick, onZoomOutClick}) => (
+const ZoomButtons = ({scale, minScale, maxScale, onZoomInClick, onZoomOutClick, onZoomSliderChange}) => (
     <div style={containerStyle}>
         <ZoomOutButton onClick={onZoomOutClick} disabled={scale <= minScale} />
         <ZoomInButton onClick={onZoomInClick} disabled={scale >= maxScale} />
+        <DragRange
+            min={minScale}
+            max={maxScale}
+            yAxis
+            value={scale}
+            onChange={(value)=> onZoomSliderChange({value})}>
+                <div className="zoomSlider">
+                    <div className="zoomColor" style={{height:((scale - minScale) * 200) / (maxScale - minScale)}} />
+                    <div
+                        className="zoomScrubber"
+                        style={{bottom: ((scale - minScale) * 200) / (maxScale - minScale)}}
+                    />
+                </div>
+            </DragRange>
     </div>
 );
 
@@ -36,6 +51,7 @@ ZoomButtons.propTypes = {
     maxScale: PropTypes.number.isRequired,
     onZoomInClick: PropTypes.func.isRequired,
     onZoomOutClick: PropTypes.func.isRequired,
+    onZoomSliderChange: PropTypes.func.isRequired
 };
 
 export default ZoomButtons;

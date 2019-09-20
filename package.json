@@ -58,6 +58,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.13",
     "@fortawesome/free-solid-svg-icons": "^5.7.0",
     "@fortawesome/react-fontawesome": "^0.1.4",
+    "react-drag-range": "github:damienoliver/react-drag-range",
     "reselect": "^4.0.0",
     "warning": "^4.0.2"
   },

@@ -206,6 +206,15 @@ export default class PinchZoomPan extends React.Component {
         this.zoomOut();
     }
 
+    handleSliderChange = (value) => {
+        console.log("slider change to: "+value.value);
+        const midpoint = {
+            x: this.state.containerDimensions.width / 2,
+            y: this.state.containerDimensions.height / 2
+        };
+        this.zoom(value.value, midpoint, 0, 0);
+    }
+
     handleWindowResize = () => this.maybeHandleDimensionsChanged();
     
     handleRefImage = ref => {
@@ -517,7 +526,8 @@ export default class PinchZoomPan extends React.Component {
                     minScale={getMinScale(this.state, this.props)} 
                     maxScale={maxScale} 
                     onZoomOutClick={this.handleZoomOutClick} 
-                    onZoomInClick={this.handleZoomInClick} 
+                    onZoomInClick={this.handleZoomInClick}
+                    onZoomSliderChange={this.handleSliderChange}
                 />}
                 {debug && <DebugView {...this.state} overflow={imageOverflow(this.state)} />}
                 {React.cloneElement(childElement, {
