@@ -19,29 +19,33 @@ const ZoomOutButton = ({ disabled, onClick }) => (
 );
 
 const ZoomInButton = ({ disabled, onClick }) => (
-    <button className='iconButton' style={{ margin: '10px', marginLeft: '0px' }} onClick={onClick} disabled={disabled}>
+    <button className='iconButton' style={{ margin: '10px' }} onClick={onClick} disabled={disabled}>
         <FontAwesomeIcon icon={faPlus} />
     </button>
 );
 
+const percentForScale = (scale, minScale, maxScale) => {
+    return ((scale - minScale) * 100) / (maxScale - minScale);
+};
+
 const ZoomButtons = ({scale, minScale, maxScale, onZoomInClick, onZoomOutClick, onZoomSliderChange}) => (
-    <div style={containerStyle}>
+    <div style={containerStyle} className="zoomButtons">
         <ZoomOutButton onClick={onZoomOutClick} disabled={scale <= minScale} />
-        <ZoomInButton onClick={onZoomInClick} disabled={scale >= maxScale} />
         <DragRange
-            min={minScale}
-            max={maxScale}
+            percent
             yAxis
-            value={scale}
+            rate={0.01}
+            value={percentForScale(scale, minScale, maxScale)}
             onChange={(value)=> onZoomSliderChange({value})}>
                 <div className="zoomSlider">
-                    <div className="zoomColor" style={{height:((scale - minScale) * 200) / (maxScale - minScale)}} />
+                    <div className="zoomColor" style={{height:percentForScale(scale, minScale, maxScale)+"%"}} />
                     <div
                         className="zoomScrubber"
-                        style={{bottom: ((scale - minScale) * 200) / (maxScale - minScale)}}
+                        style={{top: percentForScale(scale, minScale, maxScale)+"%"}}
                     />
                 </div>
             </DragRange>
+        <ZoomInButton onClick={onZoomInClick} disabled={scale >= maxScale} />
     </div>
 );
 

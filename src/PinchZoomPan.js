@@ -79,6 +79,10 @@ export default class PinchZoomPan extends React.Component {
     isImageLoaded; //permits initial transform
     originalOverscrollBehaviorY; //saves the original overscroll-behavior-y value while temporarily preventing pull down refresh
 
+    scaleForPercent = percent => {
+        return this.props.minScale + ((percent/100)*(this.props.maxScale - this.props.minScale));
+    };
+
     //event handlers
     handleTouchStart = event => {
         this.cancelAnimation();
@@ -212,7 +216,9 @@ export default class PinchZoomPan extends React.Component {
             x: this.state.containerDimensions.width / 2,
             y: this.state.containerDimensions.height / 2
         };
-        this.zoom(value.value, midpoint, 0, 0);
+        const scaleForPercent = this.scaleForPercent(value.value);
+        console.log("new scale: "+scaleForPercent);
+        this.zoom(scaleForPercent, midpoint, 0, 0);
     }
 
     handleWindowResize = () => this.maybeHandleDimensionsChanged();
@@ -615,9 +621,9 @@ export default class PinchZoomPan extends React.Component {
 }
 
 PinchZoomPan.defaultProps = {
-    initialScale: 'auto',
-    minScale: 'auto',
-    maxScale: 1,
+    initialScale: 1,//'auto',
+    minScale: 1,//'auto',
+    maxScale: 2,
     position: 'topLeft',
     zoomButtons: true,
     doubleTapBehavior: 'reset'
