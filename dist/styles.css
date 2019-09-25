@@ -1,0 +1,71 @@
+.iconButton {
+  padding: 8px;
+  cursor: pointer;
+  color: white;
+  font-size: 8px;
+  line-height: 12px;
+  border: none;
+  background-color: transparent;
+}
+
+.iconButton:hover {
+}
+
+.iconButton[disabled] {
+  opacity: 0.65;
+}
+
+.iconButton[disabled]:hover {
+  cursor: default;
+}
+
+.zoomSlider {
+  height: 200px;
+  width: 1px;
+  background: white;
+  position: relative;
+  margin-left: 21px;
+  display: block;
+}
+
+.zoomColor {
+  background: #00c381;
+  width: 1px;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+.zoomScrubber {
+  background: #00c381;
+  height: 10px;
+  width: 10px;
+  position: absolute;
+  margin-left: -4px;
+  margin-top: -4px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.zoomScrubber:after {
+  content: "";
+  padding: 10px;
+  position: absolute;
+  left: -5px;
+  top: -5px;
+}
+
+.zoomButtons {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 5px;
+  height: 300px;
+  width: 50px;
+  margin: auto;
+}
+
+.iconButton:focus {
+  outline: 0;
+}
