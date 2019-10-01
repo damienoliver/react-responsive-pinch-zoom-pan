@@ -20,7 +20,8 @@ const imageStyle = createSelector(
     state => state.scale,
     (top, left, scale) => {
         const style = {
-            cursor: 'pointer',
+            cursor: 'move',
+            cursor: 'grab',
         };
         return isInitialized(top, left, scale)
             ? {
