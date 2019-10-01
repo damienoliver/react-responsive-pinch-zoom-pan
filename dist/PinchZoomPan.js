@@ -60,9 +60,10 @@ var imageStyle = (0, _reselect.createSelector)(function (state) {
 }, function (state) {
   return state.scale;
 }, function (top, left, scale) {
-  var style = {
-    cursor: 'pointer'
-  };
+  var style = _defineProperty({
+    cursor: 'move'
+  }, "cursor", 'grab');
+
   return isInitialized(top, left, scale) ? _objectSpread({}, style, {
     transform: "translate3d(".concat(left, "px, ").concat(top, "px, 0) scale(").concat(scale, ")"),
     transformOrigin: '0 0'
